@@ -1,0 +1,5 @@
+include ':http'
+include ':Jhttp',":fragmentation_core"
+include ':flyerModel'
+include ':app'
+rootProject.name = "Flyer"

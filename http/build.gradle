@@ -1,0 +1,73 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+        //正式环境
+        online {
+            buildConfigField "String", "API", "\"https://appapi.dazhangfang.com\""
+            buildConfigField "String", "WEBAPI", "\"https://qcr.quancairen.com\""
+//            buildConfigField "String", "WEBAPI", "\"https://jzj.quancairen.com\""
+            buildConfigField "String", "APPKEY", "\"UXKCFFBS\""
+            buildConfigField "String", "APPSECRET", "\"997df5de253e43d3aa296833c94080e7\""
+            buildConfigField "String", "TXAPPID", "\"IDAPnOKj\""
+            buildConfigField "String", "KEFUKEY", "\"a22c9980-8bb7-11eb-a7a6-05c52cb11415\""
+            buildConfigField "String", "KEYLICENCE", " \"d7aOtfS5cMQGFqReWrZrPVdwm6pHVIKIF2fC5NLYUffTNhxOHVKBFWHAomw9FZtszdohSpNBw2mvOyCxz8GiNP5jvRE5qfw0FwzlqdfoKmAkc9sccYqrAdsjrT+TjDAuBH0nhBqiLi3lykEbX898chGNwX8nUN8R40Tex1SEtXJhkA6GdBtM8ig1zAMv9u4jkAincRGmVmXh6yvGXn12HUmSvQUes5S+/iZFdcOiIHexDtS57r26lJHdouq5SfEnYtrxqXE7A4ZYPNrQoGysIgxJJlJzynVfmX6vMp0ukdIR6Yar5TRPT7lZleztoRGKgSGmlTqCPnngtMr6ag/M5A==\""
+
+            flavorDimensions 'online'
+        }
+        //测试环境
+        beta {
+            buildConfigField "String", "API", "\"http://testapp.dazhangfang.vip\""
+//            buildConfigField "String", "WEBAPI", "\"https://qcr.quancairen.com\""
+            buildConfigField "String", "WEBAPI", "\"http://jz.dazhangfang.vip\""
+            buildConfigField "String", "APPKEY", "\"d30f4cd69\""
+            buildConfigField "String", "APPSECRET", "\"3d340d05100f4cd69ce5e7f57a5bb01e\""
+            buildConfigField "String", "TXAPPID", "\"TIDA3GRD\""
+            buildConfigField "String", "KEYLICENCE", "\"Ygina1XJuJ/fIhljrlzDvdCnSRLXFZH2bnl6Ri7MXFqFrPS8+d1Qg1lpdbVMZE32sYONb5q2mU3W+JhvQ0D4EnyWIqWZSv2YCCjdTQbSeajzuTbUdAkqpgZ309ENyc2+jvUWQSwluQ2XPUOwDWL+04xmV1KQMyCZXDyj4AJZg0hhkA6GdBtM8ig1zAMv9u4jkAincRGmVmXh6yvGXn12HUmSvQUes5S+/iZFdcOiIHexDtS57r26lJHdouq5SfEnYtrxqXE7A4ZYPNrQoGysIgxJJlJzynVfmX6vMp0ukdIR6Yar5TRPT7lZleztoRGKgSGmlTqCPnngtMr6ag/M5A==\""
+            buildConfigField "String", "KEFUKEY", "\"a22c9980-8bb7-11eb-a7a6-05c52cb11415\""
+            flavorDimensions 'beta'
+        }
+
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    api 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.pnikosis:materialish-progress:1.7'
+}
